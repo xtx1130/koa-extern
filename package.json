@@ -1,0 +1,18 @@
+{
+  "name": "koa-extern",
+  "version": "0.1.0",
+  "description": "extend for koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "koa",
+    "extend"
+  ],
+  "author": "xtx1130",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.2.0"
+  }
+}
