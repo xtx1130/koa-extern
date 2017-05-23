@@ -13,6 +13,7 @@
   "author": "xtx1130",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.2.0"
+    "koa": "^2.2.0",
+    "koa-router": "^7.2.0"
   }
 }
