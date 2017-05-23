@@ -8,3 +8,8 @@ koa.listen 的callback函数引用了koa-compose，
 	koa-compose 主要对中间件的数组进行整理，让next指向下一个中间件
 
 koa-router
+
+methods.forEach 对http的请求方法进行注册操作
+Router.use 主要是用于对中间件的注册，主要用于顺序执行中间件，同时参数也可以是router+middleware的形式，支持一个路由多个中间件
+Router.prefix 为路径添加统一前缀
+Router.register(path, methods, middleware, opts) 注册路由
