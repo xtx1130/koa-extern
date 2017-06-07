@@ -14,5 +14,16 @@ class KoasRouter extends KoaRouter{
 		super();
 		this[routes] = staticRoute;
 	}
+	trueUri() {
+		let [tem,temBase] = [{},'/'];
+		for(let i in this[routes]){
+			this[routes][i].baseRouter&&(temBase = this[routes][i].baseRouter);
+			Object.values(this[routes][i]).forEach(ob => {
+				if(ob[url]){
+					console.log(1)
+				}
+			})
+		}
+	}
 }
 console.log(KoasRouter)
