@@ -1,6 +1,6 @@
 koa 入口文件： koa/lib/application.js
-koa.use 引用了 koa-covert包，
-	koa-covert 主要对非async的函数进行co包装
+koa.use 引用了 koa-convert包，
+	koa-convert 主要对非async的函数进行co包装
 koa 构造函数中的 Object.create(request/response/context) 分别引用的koa/lib/下面的同名文件，
 	context中主要包含的是上下文的proto类，需要用object.create进行构造，其中开了req和res的口子，让request和resopnse挂上
 koa.createContext 创建了上下文环境
