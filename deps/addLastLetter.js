@@ -3,5 +3,7 @@
 module.exports = uri => {
 	let arr = uri.split('');
 	let last = arr.length-1;
-	return arr[last]!='/'? arr.concat(['/']).join(''):uri;
+	arr[last]!='/'&&(arr = arr.concat(['/']));
+	arr[0]!='/'&&arr.unshift('/');
+	return arr.join('');
 }
