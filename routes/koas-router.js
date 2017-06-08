@@ -50,6 +50,10 @@ class KoasRouter extends KoaRouter{
 		assert(this[routes][block]!=null,'This block is not exists');
 		assert(this[routes][block][router],'This router is not exists');
 		let temro = this[routes][block][router].url;
+		if(this[memoryRoutes][temro]>=0){
+			let index = this[memoryRoutes][temro];
+			this[routesMap][index] = temro;
+		}
 	}
 	//用map来做管理 注册到koa2的router
 	get map() {
