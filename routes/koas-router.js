@@ -1,21 +1,22 @@
 'use strict';
 
 const KoaRouter = require('koa-router');
-const routerConf = require('../koasConfig').router;
 const path = require('path');
 const delFirst = require('../deps/delFirstLetter');
 const addLast = require('../deps/addLastLetter');
-
+const assert = require('assert');
 const staticRoute = {};
 const routes = Symbol.for('koas#routes');
 const memoryRoutes = Symbol.for('koas#memoryRoutes');
 const routesMap = Symbol.for('koas#routesMap');
 
-for(let i in routerConf){
-	staticRoute[i] = require(path.join(__dirname,'../',routerConf[i]));
-}
+let routerConf = require('../koasConfig').router;
 class KoasRouter extends KoaRouter{
-	constructor(){
+	constructor(isTest){
+		isTest&&(routerConf = require('../test/koasConfig').router)
+		for(let i in routerConf){
+			staticRoute[i] = require(path.join(__dirname,'../',routerConf[i]));
+		}
 		super();
 		this[routes] = staticRoute;
 		this[memoryRoutes] = {};
@@ -43,7 +44,8 @@ class KoasRouter extends KoaRouter{
 		assert(this[memoryRoutes][router]!=null,'This router is not exists');
 		this[routes][router] = this[memoryRoutes][router];
 	}
-
+	get map() {
+		return this[routesMap];
+	}
 }
-let s = new KoasRouter();
-console.log(s.trueUri(),s[routesMap])
+module.exports = KoasRouter;
