@@ -9,7 +9,7 @@ const staticRoute = {};
 const routes = Symbol.for('koas#routes');
 const memoryRoutes = Symbol.for('koas#memoryRoutes');
 const routesMap = Symbol.for('koas#routesMap');
-const praviteInit = Symbol.for('koas#praviteInit')
+const privateInit = Symbol.for('koas#privateInit')
 
 let routerConf = require('../koasConfig').router;
 class KoasRouter extends KoaRouter{
@@ -19,9 +19,9 @@ class KoasRouter extends KoaRouter{
 			staticRoute[i] = require(path.join(__dirname,'../',routerConf[i]));
 		}
 		super();
-		this[routes] = staticRoute;
-		this[memoryRoutes] = {};
-		this[routesMap] = [];
+		this[routes] = staticRoute;//未加工的路由
+		this[memoryRoutes] = {};//对路由的增删改查做内部记录
+		this[routesMap] = [];//最终koa-router会加载的路由
 		this[privateInit]();
 	}
 	[privateInit]() {
@@ -32,7 +32,8 @@ class KoasRouter extends KoaRouter{
 			Object.values(this[routes][i]).forEach(ob => {
 				if(ob['url']){
 					ob['url'] = addLast(temBase)+delFirst(ob['url']);
-					this[routesMap].push(ob['url'])
+					this[routesMap].push(ob['url']);
+					this[memoryRoutes][ob['url']] = -1;//一级路由不能被删掉，只对二级路由做增删配置
 				}
 			})
 		}
@@ -41,9 +42,9 @@ class KoasRouter extends KoaRouter{
 		assert(this[routes][block]!=null,'This block is not exists');
 		assert(this[routes][block][router],'This router is not exists');
 		let temro = this[routes][block][router].url;
-		console.log(temro)
 		let index = this[routesMap].findIndex(ele => ele==temro);
-		console.log(index)	
+		this[memoryRoutes][temro] = index;//index>=0 是删除的路由
+		this[routesMap][index]='';//对相应的路由列表置空
 	}
 	addRouter(block,router) {
 		assert(this[routes][block]!=null,'This block is not exists');
