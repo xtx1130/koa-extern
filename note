@@ -13,3 +13,15 @@ methods.forEach 对http的请求方法进行注册操作
 Router.use 主要是用于对中间件的注册，主要用于顺序执行中间件，同时参数也可以是router+middleware的形式，支持一个路由多个中间件
 Router.prefix 为路径添加统一前缀
 Router.register(path, methods, middleware, opts) 注册路由
+
+
+文件目录
+root ------koasConfig.js(config文件)
+        |
+        |--test/(测试用例)
+        |
+        |--routes/(封装的koa-router)
+        |
+        |--deps/(插件)
+        |
+        |--index.js(入口文件)
