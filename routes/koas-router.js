@@ -9,6 +9,7 @@ const staticRoute = {};
 const routes = Symbol.for('koas#routes');
 const memoryRoutes = Symbol.for('koas#memoryRoutes');
 const routesMap = Symbol.for('koas#routesMap');
+const praviteInit = Symbol.for('koas#praviteInit')
 
 let routerConf = require('../koasConfig').router;
 class KoasRouter extends KoaRouter{
@@ -21,8 +22,9 @@ class KoasRouter extends KoaRouter{
 		this[routes] = staticRoute;
 		this[memoryRoutes] = {};
 		this[routesMap] = [];
+		this[privateInit]();
 	}
-	trueUri() {
+	[privateInit]() {
 		let [tem,temBase] = [{},'/'];
 		for(let i in this[routes]){
 			this[routes][i].baseRouter&&(temBase = this[routes][i].baseRouter);
@@ -34,18 +36,26 @@ class KoasRouter extends KoaRouter{
 				}
 			})
 		}
-		return this[routes];
 	}
-	deleteRouter(router) {
-		assert(this[routes][router]!=null,'This router is not exists');
-		[this[memoryRoutes][router],this[routes][router]] = [this[routes][router],null]
+	deleteRouter(block,router) {
+		assert(this[routes][block]!=null,'This block is not exists');
+		assert(this[routes][block][router],'This router is not exists');
+		let temro = this[routes][block][router].url;
+		console.log(temro)
+		let index = this[routesMap].findIndex(ele => ele==temro);
+		console.log(index)	
 	}
-	addRouter(router) {
-		assert(this[memoryRoutes][router]!=null,'This router is not exists');
-		this[routes][router] = this[memoryRoutes][router];
+	addRouter(block,router) {
+		assert(this[routes][block]!=null,'This block is not exists');
+		assert(this[routes][block][router],'This router is not exists');
+		let temro = this[routes][block][router].url;
 	}
+	//用map来做管理 注册到koa2的router
 	get map() {
 		return this[routesMap];
+	}
+	get jsonMap(){
+		return this[routes];
 	}
 }
 module.exports = KoasRouter;
