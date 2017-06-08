@@ -16,7 +16,7 @@ Router.register(path, methods, middleware, opts) 注册路由
 
 
 文件目录
-root---—koasConfig.js(config文件)
+root----koasConfig.js(config文件)
       |--test/(测试用例)
       | |--test.js(测试入口文件)
       | |--list/(一级路由的一级文件夹)
