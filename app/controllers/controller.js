@@ -5,6 +5,8 @@
 'use strict';
 
 const path = require('path');
+const assert = require('assert');
+
 const controllerMap = Symbol.for('koas#controllerMap');
 
 let controllerConf = require('../../koasConfig').controller;
@@ -22,6 +24,11 @@ class Controller {
 	set map(val) {
 		return this[controllerMap] 
 	}
-
+	//返回中间件函数，让用户可以自由插入到想插入的位置
+	slot (block,name){
+		assert(this[controllerMap][block]!=null,'This block is not exists');
+		assert((typeof this[controllerMap][block][name]).match('function'),'This router is not exists');
+		return this[controllerMap][block][name];
+	}
 }
 module.exports = Controller;
