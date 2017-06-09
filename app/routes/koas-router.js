@@ -2,8 +2,8 @@
 
 const KoaRouter = require('koa-router');
 const path = require('path');
-const delFirst = require('../deps/delFirstLetter');
-const addLast = require('../deps/addLastLetter');
+const delFirst = require('../../deps/delFirstLetter');
+const addLast = require('../../deps/addLastLetter');
 const assert = require('assert');
 const routes = Symbol.for('koas#routes');
 const memoryRoutes = Symbol.for('koas#routesMemory');
@@ -14,13 +14,11 @@ const staticRoute = {};
 let routerConf = require('../../koasConfig').router;
 class KoasRouter extends KoaRouter{
 	constructor(isTest){
-		if(this instanceof KoasRouter)
-			return this;
+		super();
 		isTest&&(routerConf = require('../../test/koasConfig').router)
 		for(let i in routerConf){
 			staticRoute[i] = require(path.join(__dirname,'../../',routerConf[i]));
 		}
-		super();
 		this[routes] = staticRoute;//未加工的路由
 		this[memoryRoutes] = {};//对路由的增删改查做内部记录
 		this[routesMap] = [];//最终koa-router会加载的路由
