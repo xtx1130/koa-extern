@@ -1,4 +1,4 @@
 module.exports = {
-	test1:require('./test1'),
-	test2:require('./test2')
+	movietest1:require('./test1'),
+	movietest2:require('./test2')
 }

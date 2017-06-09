@@ -1,11 +1,11 @@
 module.exports = {
 	baseRouter:'/movie',
-	test1:{
+	movietest1:{
 		url:'/:id',
 		method:'get,post',
 		success:(ctx,next)=>{}
 	},
-	test2:{
+	movietest2:{
 		url:'/xtx',
 		method:'get',
 		success:(ctx,next)=>{}

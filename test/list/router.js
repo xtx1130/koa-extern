@@ -1,11 +1,11 @@
 module.exports = {
 	baseRouter:'/list',
-	test1:{
+	listtest1:{
 		url:'/:id',
 		method:'get,post',
 		success:(ctx,next)=>{}
 	},
-	test2:{
+	listtest2:{
 		url:'/xtx',
 		method:'get',
 		success:(ctx,next)=>{}

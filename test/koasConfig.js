@@ -5,7 +5,7 @@ module.exports = {
 		list:'/test/list/router.js'
 	},
 	controller:{
-		movie:'/test/movie/controller/index.js'//,
-		// list:'/test/movie/list/index.js'
+		movie:'/test/movie/controller/index.js',
+		list:'/test/list/controller/index.js'
 	}
 }
