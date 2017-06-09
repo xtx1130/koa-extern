@@ -24,6 +24,7 @@ Router.register(path, methods, middleware, opts) 注册路由
 对底层的数组进行操作，只能通过key来操作与绑定中间件
 6.每个一级路由下分别有各自的router和controller配置文件，团队负责不同路由下面页面开发时互不干扰。
 7.koa底层加入rpc调用并维护一个公用的数据json，作为每个一级路由公用数据调用通道
+8.本项目剥离业务层，所以本地环境对debug-log的支持仅限于controller，router和底层均用assert直接抛出
 
 文件目录
 root----koasConfig.js(config文件)
