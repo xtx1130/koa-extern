@@ -15,6 +15,7 @@ Router.prefix 为路径添加统一前缀
 Router.register(path, methods, middleware, opts) 注册路由
 
 
+
 文件目录
 root----koasConfig.js(config文件)
       |--test/(测试用例)
