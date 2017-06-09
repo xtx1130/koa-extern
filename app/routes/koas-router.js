@@ -5,18 +5,20 @@ const path = require('path');
 const delFirst = require('../deps/delFirstLetter');
 const addLast = require('../deps/addLastLetter');
 const assert = require('assert');
-const staticRoute = {};
 const routes = Symbol.for('koas#routes');
-const memoryRoutes = Symbol.for('koas#memoryRoutes');
+const memoryRoutes = Symbol.for('koas#routesMemory');
 const routesMap = Symbol.for('koas#routesMap');
-const privateInit = Symbol.for('koas#privateInit')
+const privateInit = Symbol.for('koas#routesprivateInit');
+const staticRoute = {};
 
-let routerConf = require('../koasConfig').router;
+let routerConf = require('../../koasConfig').router;
 class KoasRouter extends KoaRouter{
 	constructor(isTest){
-		isTest&&(routerConf = require('../test/koasConfig').router)
+		if(this instanceof KoasRouter)
+			return this;
+		isTest&&(routerConf = require('../../test/koasConfig').router)
 		for(let i in routerConf){
-			staticRoute[i] = require(path.join(__dirname,'../',routerConf[i]));
+			staticRoute[i] = require(path.join(__dirname,'../../',routerConf[i]));
 		}
 		super();
 		this[routes] = staticRoute;//未加工的路由
