@@ -3,7 +3,7 @@
 const testing = require('testing');
 module.exports.test = callback => {
 	let tests = {};
-	let routesTest = require('../routes/koas-router');
+	let routesTest = require('../app/routes/koas-router');
 	//koas-router 测试
 	tests.routes = callback =>{
 		let koasRoutes = new routesTest(true);
