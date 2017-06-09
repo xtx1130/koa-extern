@@ -10,8 +10,8 @@ module.exports.test = callback => {
 		let koasRoutes = new routesTest(true);
 		koasRoutes.map = 1;//对set map()进行测试
 		koasRoutes.jsonMap = 1;//对set jsonMap()进行测试
-		testing.verify(Array.isArray(koasRoutes.map),'koasRoutes.map must be an array',callback);
-		testing.verify(typeof koasRoutes.jsonMap === 'object','koasRoutes.trueUri() must be a Object',callback);
+		testing.verify(Array.isArray(koasRoutes.map),'koasRoutes.map must be an Array',callback);
+		testing.verify(typeof koasRoutes.jsonMap === 'object','koasRoutes.jsonMap must be an Object',callback);
 		console.log(koasRoutes.jsonMap,koasRoutes.map)//测试的时候看结构用
 		koasRoutes.deleteRouter('list','listtest1');
 		let testMapDel = () => {
@@ -35,6 +35,8 @@ module.exports.test = callback => {
 	}
 	tests.controller = callback => {
 		let koasController = new controllerTest(true);
+		koasController.map = 1;//对set map()进行测试
+		testing.verify(typeof koasController.map === 'object','koasController.map must be an Object',callback)
 		console.log(koasController.map);
 		testing.success(callback);
 	}

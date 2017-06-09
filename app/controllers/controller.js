@@ -19,6 +19,9 @@ class Controller {
 	get map() {
 		return this[controllerMap] 
 	}
+	set map(val) {
+		return this[controllerMap] 
+	}
 
 }
 module.exports = Controller;
