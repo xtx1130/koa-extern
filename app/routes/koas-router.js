@@ -59,8 +59,14 @@ class KoasRouter extends KoaRouter{
 	get map() {
 		return this[routesMap];
 	}
+	set map(val) {
+		return this[routesMap];
+	}
 	//jsonMap 主要用于router json串管理
 	get jsonMap(){
+		return this[routes];
+	}
+	set jsonMap(val){
 		return this[routes];
 	}
 }

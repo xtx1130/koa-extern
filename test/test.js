@@ -8,6 +8,8 @@ module.exports.test = callback => {
 	//koas-router 测试
 	tests.routes = callback =>{
 		let koasRoutes = new routesTest(true);
+		koasRoutes.map = 1;//对set map()进行测试
+		koasRoutes.jsonMap = 1;//对set jsonMap()进行测试
 		testing.verify(Array.isArray(koasRoutes.map),'koasRoutes.map must be an array',callback);
 		testing.verify(typeof koasRoutes.jsonMap === 'object','koasRoutes.trueUri() must be a Object',callback);
 		console.log(koasRoutes.jsonMap,koasRoutes.map)//测试的时候看结构用
