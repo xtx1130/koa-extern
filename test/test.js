@@ -37,9 +37,9 @@ module.exports.test = callback => {
 	}
 	tests.controller = callback => {
 		let koasController = new controllerTest(true);
-		koasController.map = 1;//对set map()进行测试
-		testing.verify(typeof koasController.map === 'object','koasController.map must be an Object',callback)
-		console.log(koasController.map);
+		koasController.jsonMap = 1;//对set jsonMap()进行测试
+		testing.verify(typeof koasController.jsonMap === 'object','koasController.map must be an Object',callback)
+		console.log(koasController.jsonMap);
 		testing.success(callback);
 		let koasSlot = koasController.slot('movie','movietest1')
 		testing.verify((typeof koasSlot).match('function'),'slot must return a function or async function',callback)
