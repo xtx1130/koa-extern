@@ -13,11 +13,11 @@ const syncRouteController = Symbol.for('koas#syncRouteController')
 class Koas extends Koa{
 	constructor(){
 		super();
-		this.routes = new Routes();
+		this.koasroutes = new Routes();
 		this.controller = new Controller();
 	}
 	get routesMap() {
-		return this.routes.jsonMap;
+		return this.koasroutes.jsonMap;
 	}
 	get controlMap() {
 		return this.controller.jsonMap;
@@ -33,14 +33,14 @@ class Koas extends Koa{
 					let meth = temroute.method.split(',')||['get','post'];
 					if(temroute.status === 1){
 						for(let k = 0;k<meth.length;k++){
-							Assert(this.routes.methods.join('').match(meth[k].toUpperCase()),'only support HEAD,OPTIONS,GET,PUT,PATCH,POST,DELETE')
-							this.routes[meth[k]](temroute.url,this.controlMap[i][j])
+							Assert(this.koasroutes.methods.join('').match(meth[k].toUpperCase()),'only support HEAD,OPTIONS,GET,PUT,PATCH,POST,DELETE')
+							this.koasroutes[meth[k]](temroute.url,this.controlMap[i][j])
 						}
 					}
 				}
 			}
 		}
-		console.log(this.routes.routes())
+		console.dir(this.koasroutes.routes().router.stack)
 	}	
 }
 let s = new Koas();
