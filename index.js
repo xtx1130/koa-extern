@@ -6,12 +6,26 @@
 const Koa = require('koa');
 const Routes = require('./app/routes/koas-router');
 const Controller = require('./app/controllers/controller');
+
+const syncRouteController = Symbol.for('koas#syncRouteController')
+
 class Koas extends Koa{
 	constructor(){
 		super();
 		this.routes = new Routes();
 		this.controller = new Controller();
 	}
+	get routesMap() {
+		return this.routes.jsonMap;
+	}
+	get controlMap() {
+		return this.controller.map;
+	}
+	//同步注册routes，controllers，通过key来寻找对应关系
+	[syncRouteController](){
+		console.log(this.routesMap)
+		console.log(this.controlMap)
+	}	
 }
 let s = new Koas();
-console.dir(s)
+console.dir(s[syncRouteController]())
