@@ -18,11 +18,11 @@ class Controller {
 			this[controllerMap][i] = require(path.join(__dirname,'../../',controllerConf[i]));
 		}
 	}
-	get map() {
+	get jsonMap() {
 		return this[controllerMap] 
 	}
 	//map can't change by =
-	set map(val) {
+	set jsonMap(val) {
 		return this[controllerMap] 
 	}
 	//返回中间件函数，通过router.use让用户可以自由插入到想插入的位置

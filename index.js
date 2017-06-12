@@ -19,7 +19,7 @@ class Koas extends Koa{
 		return this.routes.jsonMap;
 	}
 	get controlMap() {
-		return this.controller.map;
+		return this.controller.jsonMap;
 	}
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController](){
