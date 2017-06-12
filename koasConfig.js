@@ -5,6 +5,7 @@ module.exports = {
 		list:'/test/list/router.js'
 	},
 	controller:{
-		test:'test/controller/index.js'
+		movie:'/test/movie/controller/index.js',
+		list:'/test/list/controller/index.js'
 	}
 }
