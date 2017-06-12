@@ -6,6 +6,7 @@
 const Koa = require('koa');
 const Routes = require('./app/routes/koas-router');
 const Controller = require('./app/controllers/controller');
+const Assert = require('assert');
 
 const syncRouteController = Symbol.for('koas#syncRouteController')
 
@@ -23,9 +24,24 @@ class Koas extends Koa{
 	}
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController](){
-		console.log(this.routesMap)
-		console.log(this.controlMap)
+		for(let i in this.routesMap){
+			for(let j in this.routesMap[i]){
+				if(j == 'baseRouter'){
+					console.log('todo index')
+				}else{
+					let temroute = this.routesMap[i][j]; 
+					let meth = temroute.method.split(',')||['get','post'];
+					if(temroute.status === 1){
+						for(let k = 0;k<meth.length;k++){
+							Assert(this.routes.methods.join('').match(meth[k].toUpperCase()),'only support HEAD,OPTIONS,GET,PUT,PATCH,POST,DELETE')
+							this.routes[meth[k]](temroute.url,this.controlMap[i][j])
+						}
+					}
+				}
+			}
+		}
+		console.log(this.routes.routes())
 	}	
 }
 let s = new Koas();
-console.dir(s[syncRouteController]())
+s[syncRouteController]()
