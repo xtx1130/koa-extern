@@ -21,6 +21,7 @@ module.exports.test = callback => {
 			}
 			return false;
 		}
+		testing.verify(koasRoutes.jsonMap.list.listtest1.status==0,'delete failed ,please check deleteRouter',callback);
 		testing.verify(testMapDel(),'delete failed ,please check deleteRouter',callback)
 		koasRoutes.addRouter('list','listtest1');
 		let testMapAdd = () => {
@@ -30,6 +31,7 @@ module.exports.test = callback => {
 			}
 			return true;
 		}
+		testing.verify(koasRoutes.jsonMap.list.listtest1.status==1,'add failed ,please check addRouter',callback);
 		testing.verify(testMapAdd(),'add failed ,please check addRouter',callback)
 		testing.success(callback);
 	}

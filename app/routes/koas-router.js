@@ -31,6 +31,7 @@ class KoasRouter extends KoaRouter{
 			this[routesMap].push(addLast(temBase));
 			Object.values(this[routes][i]).forEach(ob => {
 				if(ob['url']){
+					ob.status = 1;
 					ob['url'] = addLast(temBase)+delFirst(ob['url']);
 					this[routesMap].push(ob['url']);
 					this[memoryRoutes][ob['url']] = -1;//一级路由不能被删掉，只对二级路由做增删配置
@@ -45,11 +46,13 @@ class KoasRouter extends KoaRouter{
 		let index = this[routesMap].findIndex(ele => ele==temro);
 		this[memoryRoutes][temro] = index;//index>=0 是删除的路由
 		this[routesMap][index]='';//对相应的路由列表置空
+		this[routes][block][router].status=0;//数组暂时没用，因为一级路由的存在，数组不好统计
 	}
 	addRouter(block,router) {
 		assert(this[routes][block]!=null,'This block is not exists');
 		assert(this[routes][block][router],'This router is not exists');
 		let temro = this[routes][block][router].url;
+		this[routes][block][router].status=1;
 		if(this[memoryRoutes][temro]>=0){
 			let index = this[memoryRoutes][temro];
 			this[routesMap][index] = temro;
