@@ -1,5 +1,5 @@
 /*
- *@author: xietianxin@qiyi.com
+ *@author: xtx1130
  *@description: 整合projects下面的controller文件夹
 */
 'use strict';
