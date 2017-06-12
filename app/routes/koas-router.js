@@ -59,6 +59,7 @@ class KoasRouter extends KoaRouter{
 	get map() {
 		return this[routesMap];
 	}
+	//map can't change by =
 	set map(val) {
 		return this[routesMap];
 	}
