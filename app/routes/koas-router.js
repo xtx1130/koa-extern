@@ -17,7 +17,7 @@ class KoasRouter extends KoaRouter{
 		super();
 		isTest&&(routerConf = require('../../test/koasConfig').router)
 		for(let i in routerConf){
-			staticRoute[i] = require(path.join(__dirname,'../../',routerConf[i]));
+			staticRoute[i] = require(path.join(process.cwd(),routerConf[i]));
 		}
 		this[routes] = staticRoute;//未加工的路由
 		this[memoryRoutes] = {};//对路由的增删改查做内部记录

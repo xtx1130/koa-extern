@@ -15,7 +15,7 @@ class Controller {
 		isTest&&(controllerConf = require('../../test/koasConfig').controller);
 		this[controllerMap] = {};
 		for(var i in controllerConf){
-			this[controllerMap][i] = require(path.join(__dirname,'../../',controllerConf[i]));
+			this[controllerMap][i] = require(path.join(process.cwd(),controllerConf[i]));
 		}
 	}
 	get jsonMap() {
