@@ -11,12 +11,14 @@
     "extend"
   ],
   "author": "xtx1130",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "koa": "^2.2.0",
     "koa-router": "^7.2.0"
   },
   "devDependencies": {
     "testing": "^1.1.1"
-  }
+  },
+  "engines":{"node":"8.x"},
+
 }
