@@ -4,8 +4,7 @@
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
-    "test": "node ./test/test.js",
-    "publish": "npm version&&npm publish"
+    "test": "node ./test/test.js"
   },
   "keywords": [
     "koa",
