@@ -41,3 +41,8 @@ root----koasConfig.js(config文件)
       |--routes/(封装的koa-router)
       |--deps/(插件)
       |--index.js(入口文件)
+
+代码规范：
+1.所有内部私有属性、变量或者方法均用Symbol进行定义，通过get来暴露对外接口，禁止直接写，需通过相应的api进行写的操作（因为全局就一个koas实例）
+2.routes可以进行多次实例化操作，使用方法同koa-router
+3.TO DO：重构koa.use 删掉koa-convert的引用
