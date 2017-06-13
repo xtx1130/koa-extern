@@ -15,6 +15,7 @@ class Koas extends Koa{
 		super();
 		this.koasroutes = new Routes();
 		this.controller = new Controller();
+		this[syncRouteController]();//初始化所有的二级routes
 	}
 	get routesMap() {
 		return this.koasroutes.jsonMap;
@@ -27,7 +28,8 @@ class Koas extends Koa{
 		for(let i in this.routesMap){
 			for(let j in this.routesMap[i]){
 				if(j == 'baseRouter'){
-					console.log('todo index')
+					//TO DO: 一级路由的controller绑定还未做
+					console.log('todo index');
 				}else{
 					let temroute = this.routesMap[i][j]; 
 					let meth = temroute.method.split(',')||['get','post'];
@@ -44,4 +46,3 @@ class Koas extends Koa{
 	}	
 }
 let s = new Koas();
-s[syncRouteController]()
