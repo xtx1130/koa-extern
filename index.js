@@ -42,7 +42,7 @@ class Koas extends Koa{
 				}
 			}
 		}
-		console.dir(this.koasroutes.routes().router.stack)
+		//console.dir(this.koasroutes.routes().router.stack)
 	}	
 }
-let s = new Koas();
+//let s = new Koas();
