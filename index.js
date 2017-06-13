@@ -27,7 +27,7 @@ class Koas extends Koa{
 	[syncRouteController](){
 		for(let i in this.routesMap){
 			for(let j in this.routesMap[i]){
-				if(j == 'baseRouter'){
+				if(j === 'baseRouter'){
 					//TO DO: 一级路由的controller绑定还未做
 					console.log('todo index');
 				}else{
