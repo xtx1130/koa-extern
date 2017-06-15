@@ -58,6 +58,12 @@ class KoasRouter extends KoaRouter{
 			this[routesMap][index] = temro;
 		}
 	}
+	routes(){
+		return async (ctx,next) => {
+			let despatch = super.routes.call(this);
+			return await despatch.call(this,ctx,next)
+		}
+	}
 	//用map来做管理 注册到koa2的router
 	get map() {
 		return this[routesMap];
