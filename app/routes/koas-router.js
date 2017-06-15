@@ -58,6 +58,7 @@ class KoasRouter extends KoaRouter{
 			this[routesMap][index] = temro;
 		}
 	}
+	//重写routes()方法，之前的routes返回的是函数，非async，进行async改装
 	routes(){
 		return async (ctx,next) => {
 			let despatch = super.routes.call(this);

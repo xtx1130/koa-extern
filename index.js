@@ -27,6 +27,7 @@ class Koas extends Koa{
 	get routes() {
 		return Routes;
 	}
+	//重构koa的use方法，只针对async function进行判断，迎接8.x的lts版本，删除koa-convert引用
 	use(fn) {
 		if (Object.prototype.toString.call(fn) !== '[object AsyncFunction]') 
 			throw new TypeError('middleware must be a AsyncFunction!');
