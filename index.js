@@ -16,7 +16,7 @@ class Koas extends Koa{
 		this.koasroutes = new Routes();
 		this.controller = new Controller();
 		this[syncRouteController]();//初始化所有的二级routes
-		super.use(this.koasroutes.routes())
+		this.use(this.koasroutes.routes())
 	}
 	get routesMap() {
 		return this.koasroutes.jsonMap;
@@ -26,6 +26,12 @@ class Koas extends Koa{
 	}
 	get routes() {
 		return Routes;
+	}
+	use(fn) {
+		if (Object.prototype.toString.call(fn) !== '[object AsyncFunction]') 
+			throw new TypeError('middleware must be a AsyncFunction!');
+		this.middleware.push(fn);
+		return this;
 	}
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController](){
