@@ -11,7 +11,7 @@ const routesMap = Symbol.for('koas#routesMap');
 const privateInit = Symbol.for('koas#routesprivateInit');
 const staticRoute = {};
 
-let routerConf = require('../../koasConfig').router;
+let routerConf = require(path.join(process.cwd(),'/koasConfig')).router;
 class KoasRouter extends KoaRouter{
 	constructor(isTest){
 		super();
