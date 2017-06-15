@@ -16,12 +16,16 @@ class Koas extends Koa{
 		this.koasroutes = new Routes();
 		this.controller = new Controller();
 		this[syncRouteController]();//初始化所有的二级routes
+		super.use(this.koasroutes.routes())
 	}
 	get routesMap() {
 		return this.koasroutes.jsonMap;
 	}
 	get controlMap() {
 		return this.controller.jsonMap;
+	}
+	get routes() {
+		return Routes;
 	}
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController](){
@@ -45,4 +49,5 @@ class Koas extends Koa{
 		//console.dir(this.koasroutes.routes().router.stack)
 	}	
 }
+module.exports = Koas;
 //let s = new Koas();
