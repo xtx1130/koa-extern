@@ -53,7 +53,6 @@ class Koas extends Koa{
 				}
 			}
 		}
-		//console.dir(this.koasroutes.routes().router.stack)
 	}	
 }
 module.exports = Koas;
