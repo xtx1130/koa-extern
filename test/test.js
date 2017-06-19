@@ -5,6 +5,7 @@ module.exports.test = callback => {
 	let tests = {};
 	let routesTest = require('../app/routes/koas-router');
 	let controllerTest = require('../app/controllers/controller');
+	let Koas = require('../index');
 	//koas-router 测试
 	tests.routes = callback =>{
 		let koasRoutes = new routesTest(true);
@@ -43,6 +44,10 @@ module.exports.test = callback => {
 		testing.success(callback);
 		let koasSlot = koasController.slot('movie','movietest1')
 		testing.verify((typeof koasSlot).match('function'),'slot must return a function or async function',callback)
+	}
+	tests.Koas = callback => {
+		let koas = new Koas(false);
+		testing.success(callback);
 	}
 	testing.run(tests, 1000, callback);
 }
