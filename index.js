@@ -11,10 +11,11 @@ const Assert = require('assert');
 const syncRouteController = Symbol.for('koas#syncRouteController')
 
 class Koas extends Koa{
-	constructor(){
+	constructor(flag){
+		flag = flag|| false;
 		super();
-		this.koasroutes = new Routes();
-		this.controller = new Controller();
+		this.koasroutes = new Routes(flag);
+		this.controller = new Controller(flag);
 		this[syncRouteController]();//初始化所有的二级routes
 		this.use(this.koasroutes.routes())
 	}
@@ -40,7 +41,7 @@ class Koas extends Koa{
 			for(let j in this.routesMap[i]){
 				if(j === 'baseRouter'){
 					//TO DO: 一级路由的controller绑定还未做
-					console.log('todo index');
+					console.log(this.routesMap[i][j]);
 				}else{
 					let temroute = this.routesMap[i][j]; 
 					let meth = temroute.method.split(',')||['get','post'];
