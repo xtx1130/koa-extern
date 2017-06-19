@@ -41,7 +41,9 @@ class Koas extends Koa{
 			for(let j in this.routesMap[i]){
 				if(j === 'baseRouter'){
 					//TO DO: 一级路由的controller绑定还未做
-					console.log(this.routesMap[i][j]);
+					console.log(this.controlMap[i].index);
+					//Assert(this.controlMap[i].index)
+					this.koasroutes.get(this.routesMap[i][j],this.controlMap[i].index);
 				}else{
 					let temroute = this.routesMap[i][j]; 
 					let meth = temroute.method.split(',')||['get','post'];
