@@ -41,12 +41,13 @@ class Koas extends Koa{
 		for(let i in this.routesMap){
 			for(let j in this.routesMap[i]){
 				if(j === 'baseRouter'){
-					//TO DO: 一级路由的controller绑定还未做
+					//对一级路由进行绑定 统一get方法
 					Assert(isAsync(this.controlMap[i].index),'controlMap\'s index must be an async function');
 					this.koasroutes.get(this.routesMap[i][j],this.controlMap[i].index);
 				}else{
+					//对二级路由进行绑定，方法为routesMap中的方法，没有的话默认get
 					let temroute = this.routesMap[i][j]; 
-					let meth = temroute.method.split(',')||['get','post'];
+					let meth = (temroute.method&&temroute.method.split(','))||['get'];
 					if(temroute.status === 1){
 						for(let k = 0;k<meth.length;k++){
 							Assert(this.koasroutes.methods.join('').match(meth[k].toUpperCase()),'only support HEAD,OPTIONS,GET,PUT,PATCH,POST,DELETE')
