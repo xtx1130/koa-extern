@@ -1,6 +1,6 @@
 {
   "name": "koa-extern",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
@@ -19,7 +19,9 @@
   "devDependencies": {
     "testing": "^1.1.1"
   },
-  "engines":{"node":"8.x"},
+  "engines":{
+    "node":"8.x"
+  },
   "repository":{
     "type":"git",
     "url":"https://github.com/xtx1130/koa-extern"
