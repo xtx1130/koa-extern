@@ -6,9 +6,10 @@
 const Koa = require('koa');
 const Routes = require('./app/routes/koas-router');
 const Controller = require('./app/controllers/controller');
+const isAsync = require('./deps/isAsyncFunc');
 const Assert = require('assert');
 
-const syncRouteController = Symbol.for('koas#syncRouteController')
+const syncRouteController = Symbol.for('koas#syncRouteController');
 
 class Koas extends Koa{
 	constructor(flag){
@@ -30,7 +31,7 @@ class Koas extends Koa{
 	}
 	//重构koa的use方法，只针对async function进行判断，迎接8.x的lts版本，删除koa-convert引用
 	use(fn) {
-		if (Object.prototype.toString.call(fn) !== '[object AsyncFunction]') 
+		if (!isAsync(fn)) 
 			throw new TypeError('middleware must be a AsyncFunction!');
 		this.middleware.push(fn);
 		return this;
@@ -41,8 +42,7 @@ class Koas extends Koa{
 			for(let j in this.routesMap[i]){
 				if(j === 'baseRouter'){
 					//TO DO: 一级路由的controller绑定还未做
-					console.log(this.controlMap[i].index);
-					//Assert(this.controlMap[i].index)
+					Assert(isAsync(this.controlMap[i].index),'controlMap\'s index must be an async function');
 					this.koasroutes.get(this.routesMap[i][j],this.controlMap[i].index);
 				}else{
 					let temroute = this.routesMap[i][j]; 
