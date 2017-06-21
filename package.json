@@ -14,16 +14,18 @@
   "license": "MIT",
   "dependencies": {
     "koa": "^2.2.0",
-    "koa-router": "^7.2.0"
+    "koa-router": "^7.2.0",
+    "request": "^2.81.0",
+    "request-promise": "^4.2.1"
   },
   "devDependencies": {
     "testing": "^1.1.1"
   },
-  "engines":{
-    "node":"8.x"
+  "engines": {
+    "node": "8.x"
   },
-  "repository":{
-    "type":"git",
-    "url":"https://github.com/xtx1130/koa-extern"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xtx1130/koa-extern"
   }
 }
