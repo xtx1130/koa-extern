@@ -32,9 +32,8 @@ class koax {
 		try{
 			let res = await rp(options);
 			this.data[tplName] = res;
-			console.log(this.data[tplName])
 		}catch(e){
-			console.log(e)
+			throw e;
 		}
 		return this;
 	}
@@ -46,7 +45,7 @@ class koax {
 			for(let i in _this.data){
 				ctx.koax[i] = _this.data[i];
 			}
-			await next;
+			await next();
 		}
 		return dispatch;
 	}
