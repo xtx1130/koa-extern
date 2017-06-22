@@ -1,4 +1,4 @@
 module.exports = async (ctx,next)=>{
-	console.log('listtest2');
-	await next;
+	ctx.body='listtest2';
+	await next();
 }
