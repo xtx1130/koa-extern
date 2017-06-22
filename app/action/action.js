@@ -37,6 +37,9 @@ class koax {
 		}
 		return this;
 	}
+	cached(){
+		return this;
+	}
 	//返回供koas调用的中间件，这里data挂在到ctx上
 	middleware(){
 		let _this = this;
