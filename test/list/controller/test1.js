@@ -1,4 +1,5 @@
+let json = require('../../json/testKoax1')
 module.exports = async (ctx,next)=>{
-	ctx.body='listtest1';
+	ctx.body=json;
 	await next();
 }
