@@ -71,7 +71,6 @@ module.exports.test = callback => {
 			uri:'http://localhost:8012/testKoax2',
 			method:'POST'
 		});
-		
 		app.use(koax.middleware());
 		let server = app.listen('8011');
 		let httprequest = await rq('http://localhost:8011/list');
