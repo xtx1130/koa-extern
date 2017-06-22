@@ -12,6 +12,7 @@ class koax {
 	constructor(){
 		this.data = {};
 		this.nameCache = void 0;
+		this.dataCache = {};
 	}
 	//设置cookie 不做了，cookie独立出来一个类，也可以加到request中
 	// setCookie(){
@@ -21,7 +22,7 @@ class koax {
 	setName(name){
 		assert(!this.data[name],'this name has been declared.');
 		this.data[name]={};
-		this.nameCache = name
+		this.nameCache = name;
 		return this;
 	}
 	//request请求接口，这里数据挂载到data视图上，async为以后多请求做准备
@@ -37,7 +38,8 @@ class koax {
 		}
 		return this;
 	}
-	cached(){
+	cached(name){
+		let tplName = name||this.nameCache;
 		return this;
 	}
 	//返回供koas调用的中间件，这里data挂在到ctx上
