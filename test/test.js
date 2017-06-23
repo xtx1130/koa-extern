@@ -81,14 +81,16 @@ module.exports.test = callback => {
 			testing.check(error, 'Could not stop server', callback);
 		});
 		/*daily build 需要改一下注释啊，别tmd忘了。。。要不然又failing了
-		改天写env的时候记得写个dailybuild的env 
+		travis.ci定义了travis的env
 		*/
-		console.log(process.env.nodeENV)
-		server.close((error) => {
-			testing.check(error, 'Could not stop server', callback);
+		if(process.env.nodeENV === 'travis'){
+			server.close((error) => {
+				testing.check(error, 'Could not stop server', callback);
+				testing.success(callback);
+			});
+		}else{
 			testing.success(callback);
-		});
-		//testing.success(callback);
+		}
 	}
 	testing.run(tests, 1000, callback);
 }

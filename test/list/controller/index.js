@@ -7,7 +7,7 @@ module.exports = {
 	index:async (ctx,next)=>{
 		console.log('````````````')
 		ctx.body = ctx.koax;
-		ctx.cookies.set('xtx','nb')
+		ctx.cookies.set('xtx','nb');
 		ctx.status =200;
 		await next();
 	}
