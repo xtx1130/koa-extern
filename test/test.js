@@ -80,10 +80,8 @@ module.exports.test = callback => {
 		testserver.close((error) => {
 			testing.check(error, 'Could not stop server', callback);
 		});
-		/*daily build 需要改一下注释啊，别tmd忘了。。。要不然又failing了
-		travis.ci定义了travis的env
-		*/
-		if(process.env.nodeENV === 'travis'){
+		/*.travis.yml定义了travis的env*/
+		if(process.env.NODE_ENV === 'travis'){
 			server.close((error) => {
 				testing.check(error, 'Could not stop server', callback);
 				testing.success(callback);

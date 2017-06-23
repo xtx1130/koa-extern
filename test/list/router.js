@@ -6,7 +6,7 @@ module.exports = {
 		success:(ctx,next)=>{}
 	},
 	listtest2:{
-		url:'/xtx',
+		url:'xtx/',
 		method:'get',
 		success:(ctx,next)=>{}
 	}
