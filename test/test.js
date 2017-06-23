@@ -81,7 +81,7 @@ module.exports.test = callback => {
 			testing.check(error, 'Could not stop server', callback);
 		});
 		/*daily build 需要改一下注释啊，别tmd忘了。。。要不然又failing了
-		改天写env的时候记得写个dailybuild的env
+		改天写env的时候记得写个dailybuild的env 
 		*/
 		server.close((error) => {
 			testing.check(error, 'Could not stop server', callback);
