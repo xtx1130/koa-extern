@@ -57,7 +57,7 @@ module.exports.test = callback => {
 		let testkoa = new Koa();
 		let testrouter = new koaRouter();
 		let testAsyncMiddleware = (ctx,next) => {
-			testing.verify(typeof next === 'function','next shoud be an async function');
+			testing.verify(next.then,'next shoud be an async function');
 		}
 		testrouter.get('/testkoax1',(ctx,next)=>{
 			ctx.body = require('./json/testKoax1');
@@ -77,7 +77,7 @@ module.exports.test = callback => {
 			uri:'http://localhost:8012/testKoax2',
 			method:'POST'
 		});
-		//app.use(asyncMiddleware(testAsyncMiddleware))
+		app.use(asyncMiddleware(testAsyncMiddleware))
 		app.use(koax.middleware());
 		let server = app.listen('8011');
 		let httprequest = await rq('http://localhost:8011/list');
