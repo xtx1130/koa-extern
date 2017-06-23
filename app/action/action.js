@@ -6,7 +6,6 @@
 */
 
 const rp = require('request-promise');
-//const tough = require('tough-cookie');
 const assert = require('assert');
 const isEmptyObj = require('../../deps/isEmptyObj');
 
@@ -16,10 +15,6 @@ class koax {
 		this.nameCache = void 0;
 		this.dataCache = {};
 	}
-	//设置cookie 不做了，cookie独立出来一个类，也可以加到request中
-	// setCookie(){
-	// 	return this;
-	// }
 	//设置数据的key
 	setName(name){
 		assert(!this.data[name],'this name has been declared.');
@@ -41,10 +36,10 @@ class koax {
 		try {
 			let res = await rp(options);
 			this.data[tplName] = res;
+			return this;
 		} catch (e) {
 			throw e;
 		}
-		return this;
 	}
 	/*
 	 *@description 为request请求添加缓存，防止下一次请求的时候进行http调用
