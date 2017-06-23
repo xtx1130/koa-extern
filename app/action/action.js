@@ -29,12 +29,12 @@ class koax {
 	}
 	/*
 	 *@description request请求接口，这里数据挂载到data视图上，
-		async为以后多请求做准备
-		name 可不加，链式调用的时候name做缓存，取最近声明的name
+		async为以后多请求做准备 name 可不加，链式调用的时候name做缓存，取最近声明的name
+		important: 因为为async函数，所以一定要放到链式最后调用，如果觉得不方便，以后改成use的形式
 	*/
-	async request(options,name){
-		let tplName = name||this.nameCache;
-		assert(tplName,'no name has been declared.');
+	async request(options, name) {
+		let tplName = name || this.nameCache;
+		assert(tplName, 'no name has been declared.');
 		if (this.dataCache[tplName] && !isEmptyObj(this.data[tplName])) {
 			return this;
 		}
@@ -46,8 +46,11 @@ class koax {
 		}
 		return this;
 	}
-	cached(name){
-		let tplName = name||this.nameCache;
+	/*
+	 *@description 为request请求添加缓存，防止下一次请求的时候进行http调用
+	*/
+	cached(name) {
+		let tplName = name || this.nameCache;
 		this.dataCache[tplName] = true;
 		return this;
 	}
