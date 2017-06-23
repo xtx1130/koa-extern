@@ -2,11 +2,13 @@
 /*
  *@decription 公共数据统一管理
  *@author xtx1130
+ *@memo 每一个koax实例会相应的维护一套数据
 */
 
 const rp = require('request-promise');
 //const tough = require('tough-cookie');
 const assert = require('assert');
+const isEmptyObj = require('../../deps/isEmptyObj');
 
 class koax {
 	constructor(){
@@ -25,21 +27,28 @@ class koax {
 		this.nameCache = name;
 		return this;
 	}
-	//request请求接口，这里数据挂载到data视图上，async为以后多请求做准备
-	//name 可不加，链式调用的时候name做缓存，取最近声明的name
+	/*
+	 *@description request请求接口，这里数据挂载到data视图上，
+		async为以后多请求做准备
+		name 可不加，链式调用的时候name做缓存，取最近声明的name
+	*/
 	async request(options,name){
 		let tplName = name||this.nameCache;
 		assert(tplName,'no name has been declared.');
-		try{
+		if (this.dataCache[tplName] && !isEmptyObj(this.data[tplName])) {
+			return this;
+		}
+		try {
 			let res = await rp(options);
 			this.data[tplName] = res;
-		}catch(e){
+		} catch (e) {
 			throw e;
 		}
 		return this;
 	}
 	cached(name){
 		let tplName = name||this.nameCache;
+		this.dataCache[tplName] = true;
 		return this;
 	}
 	//返回供koas调用的中间件，这里data挂在到ctx上
@@ -47,9 +56,7 @@ class koax {
 		let _this = this;
 		let dispatch = async (ctx,next) => {
 			ctx.koax = ctx.koax||{};
-			for(let i in _this.data){
-				ctx.koax[i] = _this.data[i];
-			}
+			let copy = Object.assign(ctx.koax,_this.data);
 			await next();
 		}
 		return dispatch;
