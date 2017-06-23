@@ -9,8 +9,9 @@
     "debug": "nodemon ./test/test.js"
   },
   "keywords": [
-    "koa",
-    "extend"
+    "koa2",
+    "extend",
+    "koax"
   ],
   "author": "xtx1130",
   "license": "MIT",
