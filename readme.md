@@ -1,5 +1,5 @@
 ## koa-extend
-> 对koa进行扩展，分离router和controller，支持async，舍弃koa-convert
+> 对koa进行扩展，分离router和controller，支持async，舍弃koa-convert , 开发[note](https://github.com/xtx1130/koa-extern/blob/master/note)
 
 ### 1.简介
 
