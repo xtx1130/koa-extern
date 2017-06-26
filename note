@@ -41,6 +41,10 @@ root----koasConfig.js(config文件)
       | |--koasConfig.js(测试用的config文件)
       |--routes/(封装的koa-router)
       |--deps/(插件)
+      |--app/(core)
+        |--action/(model层调用)
+        |--controllers/(c层结构，主要是统一读取routes的function)
+        |--routes/(router,主要是统一对路由进行处理)
       |--index.js(入口文件)
 
 代码规范：
