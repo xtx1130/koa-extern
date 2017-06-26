@@ -62,4 +62,4 @@ class Koas extends Koa {
 		return super.listen.apply(this,arguments);
 	}
 }
-module.exports = Koas;
+exports = module.exports = Koas;
