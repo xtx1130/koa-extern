@@ -32,4 +32,4 @@ class Controller {
 		return this[controllerMap][block][name];
 	}
 }
-module.exports = Controller;
+exports = module.exports = Controller;
