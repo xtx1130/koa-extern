@@ -6,7 +6,7 @@ const koaRouter = require('koa-router');
 const rq = require('request-promise');
 const asyncMiddleware = require('../deps/asyncMiddleware');
 const isAsync = require('../deps/isAsyncFunc');
-exports = module.exports.test = callback => {
+exports.test = module.exports.test = callback => {
 	let tests = {};
 	let routesTest = require('../app/routes/koas-router');
 	let controllerTest = require('../app/controllers/controller');
