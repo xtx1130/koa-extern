@@ -4,6 +4,6 @@
  *@return {boolean} ture\false
  */
 'use strict';
-module.exports = func => {
+exports = module.exports = func => {
 	return Object.prototype.toString.call(func) === '[object AsyncFunction]'
 }

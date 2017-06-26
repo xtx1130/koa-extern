@@ -81,4 +81,4 @@ class KoasRouter extends KoaRouter {
 		return this[routes];
 	}
 }
-module.exports = KoasRouter;
+exports = module.exports = KoasRouter;
