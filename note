@@ -26,7 +26,8 @@ Router.register(path, methods, middleware, opts) 注册路由
 7.koa底层加入rpc调用并维护一个公用的数据json，作为每个一级路由公用数据调用通道
 8.本项目剥离业务层，所以本地环境对debug-log的支持仅限于controller，router和底层均用assert直接抛出
 9.项目完成后，会加入cli构建，开发过程中每个模块的代码均需要在test/目录下写测试用例
-
+10.routes可以进行多次实例化操作，使用方法同koa-router
+11.重构koa.use 删掉koa-convert的引用
 文件目录
 root----koasConfig.js(config文件)
       |--test/(测试用例)
@@ -43,6 +44,7 @@ root----koasConfig.js(config文件)
       |--index.js(入口文件)
 
 代码规范：
-1.所有内部私有属性、变量或者方法均用Symbol进行定义，通过get来暴露对外接口，禁止直接写，需通过相应的api进行写的操作（因为全局就一个koas实例）
-2.routes可以进行多次实例化操作，使用方法同koa-router
-3.TO DO：重构koa.use 删掉koa-convert的引用(is finsihed)
+1.所有内部私有方法均用Symbol进行定义，通过get来暴露对外接口，禁止直接写，需通过相应的api进行写的操作（因为全局就一个koas实例）
+2.插件和代码的exports均用exports = module.exports = 来进行导出
+3.所有文件必须加'use strict'
+4.上下文无关函数需单独拿出来加到deps中
