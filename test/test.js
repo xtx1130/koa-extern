@@ -10,7 +10,6 @@ exports.test = module.exports.test = callback => {
 	let tests = {};
 	let routesTest = require('../app/routes/koas-router');
 	let controllerTest = require('../app/controllers/controller');
-	let Koax = require('../app/action/action');
 	let Koas = require('../index');
 	//koas-router 测试
 	tests.routes = callback =>{
@@ -47,53 +46,9 @@ exports.test = module.exports.test = callback => {
 		koasController.jsonMap = 1;//对set jsonMap()进行测试
 		testing.verify(typeof koasController.jsonMap === 'object','koasController.map must be an Object',callback)
 		console.log(koasController.jsonMap);
-		testing.success(callback);
 		let koasSlot = koasController.slot('movie','movietest1')
 		testing.verify((typeof koasSlot).match('function'),'slot must return a function or async function',callback)
-	}
-	tests.Koas = async callback => {
-		let app = new Koas(true);
-		let koax = new Koax();
-		let testkoa = new Koa();
-		let testrouter = new koaRouter();
-		let testAsyncMiddleware = (ctx,next) => {
-			testing.verify(next.then,'next shoud be an async function');
-		}
-		testrouter.get('/testkoax1',(ctx,next)=>{
-			ctx.body = require('./json/testKoax1');
-			ctx.status = 200;
-		});
-		testrouter.post('/testkoax2',(ctx,next)=>{
-			ctx.body = require('./json/testKoax2');
-			ctx.status = 200;
-		});
-		testkoa.use(testrouter.routes());
-		let testserver = testkoa.listen('8012');
-		koax.setName('testKoax1').request({
-			uri:'http://localhost:8012/testkoax1',
-			method:'GET'
-		});
-		koax.setName('testKoax2').cached().request({
-			uri:'http://localhost:8012/testKoax2',
-			method:'POST'
-		});
-		app.use(asyncMiddleware(testAsyncMiddleware))
-		app.use(koax.middleware());
-		let server = app.listen('8011');
-		let httprequest = await rq('http://localhost:8011/list');
-		testing.verify(httprequest,callback);
-		testserver.close((error) => {
-			testing.check(error, 'Could not stop server', callback);
-		});
-		/*.travis.yml定义了travis的env*/
-		if(process.env.NODE_ENV === 'travis'){
-			server.close((error) => {
-				testing.check(error, 'Could not stop server', callback);
-				testing.success(callback);
-			});
-		}else{
-			testing.success(callback);
-		}
+		testing.success(callback);
 	}
 	testing.run(tests, 1000, callback);
 }
