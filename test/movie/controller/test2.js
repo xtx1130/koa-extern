@@ -1,4 +1,4 @@
 module.exports = async (ctx,next)=>{
-	ctx.body='listtest2';
+	ctx.body='movietest2';
 	await next();
 }
