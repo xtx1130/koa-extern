@@ -11,6 +11,6 @@
 + 扩展koa-router,底层加入router Map和controller Map对中间件的注册绑定进行管理，而外部暴露出来的增删改查均和配置文件的key有关，人为无法直接
 对底层的Map进行操作，只能通过key来操作与绑定中间件  
 + 每个一级路由下分别有各自的router和controller配置文件，整体团队负责不同路由下面的页面开发时互不干扰  
-+ koa底层加入rpc调用并维护一个公用的数据json，作为每个一级路由公用数据调用通道（TO DO）  
++ koa底层加入request，作为每个一级路由公用数据调用通道（已加入koa2-request-middleware）  
 + 本项目剥离业务层，所以本地环境对除虫模式的支持仅限于controller，router和底层错误均用assert直接抛出  
 + 项目完成后，会加入cli构建，开发过程中每个模块的代码均需要在/test目录下写测试用例（TO DO）
