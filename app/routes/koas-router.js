@@ -15,10 +15,12 @@ class KoasRouter extends KoaRouter {
 	constructor(isTest) {
 			super();
 			let staticRoute = {};
-			isTest && (routerConf = require('../../test/koasConfig').router)
+			let routePath = void 0;
+			isTest && (routerConf = require('../../test/koasConfig').router);
 			for (let i in routerConf) {
-				staticRoute[i] = require(path.join(process.cwd(), routerConf[i]));
-				delete require.cache[require.resolve(path.join(process.cwd(), routerConf[i]))]
+				routePath = path.join(process.cwd(), routerConf[i]);
+				staticRoute[i] = require(routePath);
+				delete require.cache[require.resolve(routePath)]
 			}
 			this[routes] = Object.assign({},staticRoute); //未加工的路由
 			this[memoryRoutes] = {}; //对路由的增删改查做内部记录
@@ -33,7 +35,6 @@ class KoasRouter extends KoaRouter {
 				Object.values(this[routes][i]).forEach(ob => {
 					if (ob['url']) {
 						ob.status = 1;
-						console.log(addLast(temBase),delFirst(ob['url']),'-----end')
 						ob['url'] = addLast(temBase) + delFirst(ob['url']);
 						this[routesMap].push(ob['url']);
 						this[memoryRoutes][ob['url']] = -1; //一级路由不能被删掉，只对二级路由做增删配置
