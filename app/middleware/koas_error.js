@@ -1,9 +1,5 @@
 'use strict';
 
-const errOptions = {
-	msg:void 0,
-	code:500
-}
 let errFunc = async (ctx, next)=>{
 	try{
 		await next();
@@ -24,7 +20,6 @@ let errFunc = async (ctx, next)=>{
 					'</body>'+
 					'</html>';
 		let type = ctx.accepts(['html','text','json']);
-		console.log(type,ctx.request.header)
 		switch(type){
 			case 'html':
 				ctx.type = 'text/html';
@@ -35,8 +30,9 @@ let errFunc = async (ctx, next)=>{
 				ctx.body = e.stack;
 				break;
 			case 'json':
+				ctx.status=500;
 				ctx.type = 'application/json';
-				ctx.body = JSON.Stringify(e);
+				ctx.body = JSON.stringify({code:e.code||'No error code',stack:e.stack,message:e.message})
 		}
 	}
 }
