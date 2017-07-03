@@ -30,9 +30,12 @@ let errFunc = async (ctx, next)=>{
 				ctx.body = e.stack;
 				break;
 			case 'json':
-				ctx.status=500;
 				ctx.type = 'application/json';
-				ctx.body = JSON.stringify({code:e.code||'No error code',stack:e.stack,message:e.message})
+				ctx.body = JSON.stringify({code:e.code||'No error code',stack:e.stack,message:e.message});	
+				break;
+			default:
+				ctx.type = 'text/html';
+				ctx.body = htmlString;
 		}
 	}
 }
