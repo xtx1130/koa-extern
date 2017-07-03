@@ -58,7 +58,7 @@ exports.test = module.exports.test = callback => {
 			throw new Error('wtf')
 			await next();
 		})
-		let server = app.listen('8011');
+		//let server = app.listen('8011');
 		testing.success(callback);	
 	}
 	testing.run(tests, 1000, callback);
