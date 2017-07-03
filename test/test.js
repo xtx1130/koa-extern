@@ -6,6 +6,7 @@ const koaRouter = require('koa-router');
 const rq = require('request-promise');
 const asyncMiddleware = require('../deps/asyncMiddleware');
 const isAsync = require('../deps/isAsyncFunc');
+const err = require('../app/middleware/koas_error');
 exports.test = module.exports.test = callback => {
 	let tests = {};
 	let routesTest = require('../app/routes/koas-router');
@@ -52,8 +53,12 @@ exports.test = module.exports.test = callback => {
 	}
 	tests.koas = callback => {
 		let app = new Koas(true);
-		//TO DO
-		//let server = app.listen('8011');
+		app.use(err);
+		app.use(async (ctx,next)=>{
+			throw new Error('wtf')
+			await next();
+		})
+		let server = app.listen('8011');
 		testing.success(callback);	
 	}
 	testing.run(tests, 1000, callback);
