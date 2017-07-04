@@ -58,6 +58,11 @@ exports.test = module.exports.test = callback => {
 			await next();
 		})
 		let server = app.listen('8011');
+		if(process.env.NODE_ENV === 'travis'){
+			server.close(error => {
+				testing.check(error, 'Could not stop server', callback);
+			});
+		}
 		testing.success(callback);	
 	}
 	testing.run(tests, 1000, callback);
