@@ -19,9 +19,11 @@ koasRoutes.map = 1; //对set map()进行测试
 koasRoutes.jsonMap = 1; //对set jsonMap()进行测试
 test('koasRoutes.map must be an Array', () => {
 	expect(Array.isArray(koasRoutes.map)).toBe(true)
-});/*
-testing.verify(typeof koasRoutes.jsonMap === 'object', 'koasRoutes.jsonMap must be an Object', callback);
-console.log(koasRoutes.jsonMap, koasRoutes.map) //测试的时候看结构用
+});
+test('koasRoutes.jsonMap must be an Object', () => {
+	expect(typeof koasRoutes.jsonMap === 'object').toBe(true);
+});
+//console.log(koasRoutes.jsonMap, koasRoutes.map) //测试的时候看结构用
 koasRoutes.deleteRouter('list', 'listtest1');
 let testMapDel = () => {
 	for (let i = 0; i < koasRoutes.map.length; i++) {
@@ -30,8 +32,12 @@ let testMapDel = () => {
 	}
 	return false;
 }
-testing.verify(koasRoutes.jsonMap.list.listtest1.status == 0, 'delete failed ,please check deleteRouter', callback);
-testing.verify(testMapDel(), 'delete failed ,please check deleteRouter', callback)
+test('one of the koa router has been deleted',() => {
+	expect(koasRoutes.jsonMap.list.listtest1.status == 0).toBe(true)
+});
+test('deleteRouter is ok',()=>{
+	expect(testMapDel()).toBe(true);
+})
 koasRoutes.addRouter('list', 'listtest1');
 let testMapAdd = () => {
 	for (let i = 0; i < koasRoutes.map.length; i++) {
@@ -40,11 +46,14 @@ let testMapAdd = () => {
 	}
 	return true;
 }
-testing.verify(koasRoutes.jsonMap.list.listtest1.status == 1, 'add failed ,please check addRouter', callback);
-testing.verify(testMapAdd(), 'add failed ,please check addRouter', callback)
-testing.success(callback);
+test('addRouter is ok ,router has been added', () => {
+	expect(koasRoutes.jsonMap.list.listtest1.status).toBe(1)
+});
+test('add function has been finished', () => {
+	expect(testMapAdd()).toBe(true)
+});
 //koas controller 测试
-let koasController = new controllerTest(true);
+/*let koasController = new controllerTest(true);
 koasController.jsonMap = 1; //对set jsonMap()进行测试
 testing.verify(typeof koasController.jsonMap === 'object', 'koasController.map must be an Object', callback)
 console.log(koasController.jsonMap);
