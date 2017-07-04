@@ -43,7 +43,7 @@ class Koas extends Koa {
 			for (let j in this.routesMap[i]) {
 				if (j === 'baseRouter') {
 					//对一级路由进行绑定 统一get方法
-					Assert(isAsync(this.controlMap[i].index), 'controlMap\'s index must be an async function');
+					Assert(isAsync(this.controlMap[i].index), `${i} index must be an async function`);
 					this.koasroutes.get(this.routesMap[i][j], this.controlMap[i].index);
 				} else {
 					//对二级路由进行绑定，方法为routesMap中的方法，没有的话默认get
