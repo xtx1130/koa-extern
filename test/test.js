@@ -1,8 +1,9 @@
 'use strict';
 
+require("babel-core/register");
+require("babel-polyfill");
+
 const testing = require('testing');
-const Koa = require('koa');
-const koaRouter = require('koa-router');
 const rq = require('request-promise');
 const asyncMiddleware = require('../deps/asyncMiddleware');
 const isAsync = require('../deps/isAsyncFunc');
