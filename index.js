@@ -14,8 +14,8 @@ const syncRouteController = Symbol.for('koas#syncRouteController');
 
 class Koas extends Koa {
 	constructor(flag) {
-		flag = flag || false;
 		super();
+		flag = flag || false;
 		this.koasroutes = new Routes(flag);
 		this.controller = new Controller(flag);
 		this[syncRouteController](); //初始化所有的二级routes
