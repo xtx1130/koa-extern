@@ -53,12 +53,11 @@ exports.test = module.exports.test = callback => {
 	}
 	tests.koas = callback => {
 		let app = new Koas(true);
-		app.use(err);
 		app.use(async (ctx,next)=>{
 			throw new Error('wtf')
 			await next();
 		})
-		//let server = app.listen('8011');
+		let server = app.listen('8011');
 		testing.success(callback);	
 	}
 	testing.run(tests, 1000, callback);

@@ -8,6 +8,7 @@ const Routes = require('./app/routes/koas-router');
 const Controller = require('./app/controllers/controller');
 const isAsync = require('./deps/isAsyncFunc');
 const Assert = require('assert');
+const koasError = require('./app/middleware/koas_error');
 
 const syncRouteController = Symbol.for('koas#syncRouteController');
 
@@ -18,6 +19,7 @@ class Koas extends Koa {
 		this.koasroutes = new Routes(flag);
 		this.controller = new Controller(flag);
 		this[syncRouteController](); //初始化所有的二级routes
+		this.use(koasError);
 	}
 	get routesMap() {
 		return this.koasroutes.jsonMap;
