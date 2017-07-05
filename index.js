@@ -49,7 +49,7 @@ class Koas extends Koa {
 					//对二级路由进行绑定，方法为routesMap中的方法，没有的话默认get
 					let temroute = this.routesMap[i][j];
 					let meth = (temroute.method && temroute.method.split(',')) || ['get'];
-					if (temroute.status === 1) {
+					if (temroute.status === 1) { //status 为1的时候才能注册路由
 						for (let k = 0; k < meth.length; k++) {
 							Assert(this.koasroutes.methods.join('').match(meth[k].toUpperCase()), 'only support HEAD,OPTIONS,GET,PUT,PATCH,POST,DELETE')
 							this.koasroutes[meth[k]](temroute.url, this.controlMap[i][j])
