@@ -23,8 +23,6 @@ test('koasRoutes.map must be an Array', () => {
 test('koasRoutes.jsonMap must be an Object', () => {
 	expect(typeof koasRoutes.jsonMap === 'object').toBe(true);
 });
-//console.log(koasRoutes.jsonMap, koasRoutes.map) //测试的时候看结构用
-koasRoutes.deleteRouter('list', 'listtest1');
 let testMapDel = () => {
 	for (let i = 0; i < koasRoutes.map.length; i++) {
 		if (koasRoutes.map[i] == '')
@@ -33,12 +31,13 @@ let testMapDel = () => {
 	return false;
 }
 test('one of the koa router has been deleted',() => {
+	koasRoutes.deleteRouter('list', 'listtest1');
+	//console.log(koasRoutes.map) //测试的时候看结构用
 	expect(koasRoutes.jsonMap.list.listtest1.status == 0).toBe(true)
 });
 test('deleteRouter is ok',()=>{
 	expect(testMapDel()).toBe(true);
-})
-koasRoutes.addRouter('list', 'listtest1');
+});
 let testMapAdd = () => {
 	for (let i = 0; i < koasRoutes.map.length; i++) {
 		if (koasRoutes.map[i] == '')
@@ -47,21 +46,26 @@ let testMapAdd = () => {
 	return true;
 }
 test('addRouter is ok ,router has been added', () => {
+	koasRoutes.addRouter('list', 'listtest1');
 	expect(koasRoutes.jsonMap.list.listtest1.status).toBe(1)
 });
 test('add function has been finished', () => {
 	expect(testMapAdd()).toBe(true)
 });
 //koas controller 测试
-/*let koasController = new controllerTest(true);
-koasController.jsonMap = 1; //对set jsonMap()进行测试
-testing.verify(typeof koasController.jsonMap === 'object', 'koasController.map must be an Object', callback)
-console.log(koasController.jsonMap);
-let koasSlot = koasController.slot('movie', 'movietest1')
-testing.verify((typeof koasSlot).match('function'), 'slot must return a function or async function', callback)
-testing.success(callback);
+
+let koasController = new controllerTest(true);
+test('koasController.map must be an Object', () => {
+	koasController.jsonMap = 1; //对set jsonMap()进行测试
+	expect(typeof koasController.jsonMap).toBe('object')
+});
+//console.log(koasController.jsonMap);
+test('slot must return a function or async function', ()=>{
+	let koasSlot = koasController.slot('movie', 'movietest1')
+	expect(typeof koasSlot).toBe('function');
+});
 //koas 测试
-let app = new Koas(true);
+/*let app = new Koas(true);
 app.use(async(ctx, next) => {
 	throw new Error('wtf')
 	await next();
