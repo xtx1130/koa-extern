@@ -11,8 +11,8 @@ const controllerMap = Symbol.for('koas#controllerMap');
 
 let controllerConf = require(path.join(process.cwd(), '/koasConfig')).controller;
 class Controller {
-	constructor(isTest) {
-		isTest && (controllerConf = require('../../test/koasConfig').controller);
+	constructor() {
+		(process.env.NODE_ENV=='travis') && (controllerConf = require('../../test/koasConfig').controller);
 		this[controllerMap] = {};
 		for (var i in controllerConf) {
 			this[controllerMap][i] = require(path.join(process.cwd(), controllerConf[i]));

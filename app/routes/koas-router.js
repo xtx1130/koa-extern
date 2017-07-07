@@ -12,11 +12,11 @@ const privateInit = Symbol.for('koas#routesprivateInit');
 
 let routerConf = require(path.join(process.cwd(), '/koasConfig')).router;
 class KoasRouter extends KoaRouter {
-	constructor(isTest) {
+	constructor() {
 			super();
 			let staticRoute = {};
 			let routePath = void 0;
-			isTest && (routerConf = require('../../test/koasConfig').router);
+			(process.env.NODE_ENV=='travis') && (routerConf = require('../../test/koasConfig').router);
 			for (let i in routerConf) {
 				routePath = path.join(process.cwd(), routerConf[i]);
 				staticRoute[i] = require(routePath);
