@@ -3,6 +3,11 @@
  *@author xtx1130
  *@description 处理基础routes和基本controller绑定，抛出扩展后的koa构造函数
  */
+require("babel-register")({
+  ignore: false
+});
+require("babel-polyfill");
+
 const Koa = require('koa');
 const Routes = require('./app/routes/koas-router');
 const Controller = require('./app/controllers/controller');
@@ -11,13 +16,11 @@ const Assert = require('assert');
 const koasError = require('./app/middleware/koas_error');
 
 const syncRouteController = Symbol.for('koas#syncRouteController');
-
 class Koas extends Koa {
-	constructor(flag) {
+	constructor() {
 		super();
-		flag = flag || false;
-		this.koasroutes = new Routes(flag);
-		this.controller = new Controller(flag);
+		this.koasroutes = new Routes();
+		this.controller = new Controller();
 		this[syncRouteController](); //初始化所有的二级routes
 		this.use(koasError);
 	}

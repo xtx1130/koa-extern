@@ -1,8 +1,5 @@
 'use strict';
 
-// require("babel-core/register");
-// require("babel-polyfill");
-
 const rq = require('request-promise');
 const asyncMiddleware = require('../deps/asyncMiddleware');
 const isAsync = require('../deps/isAsyncFunc');
