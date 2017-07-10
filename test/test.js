@@ -4,14 +4,12 @@ const rq = require('request-promise');
 const asyncMiddleware = require('../deps/asyncMiddleware');
 const isAsync = require('../deps/isAsyncFunc');
 const err = require('../app/middleware/koas_error');
+const Koas = require('../');
 
-let tests = {};
-let routesTest = require('../app/routes/koas-router');
-let controllerTest = require('../app/controllers/controller');
-//let Koas = require('../');
+let app = new Koas();
 //koas-router 测试
 describe('koas-router tester',() => {
-	let koasRoutes = new routesTest();
+	let koasRoutes = app.koasroutes;
 	koasRoutes.map = 1; //对set map()进行测试
 	koasRoutes.jsonMap = 1; //对set jsonMap()进行测试
 	test('koasRoutes.map must be an Array', () => {
@@ -52,7 +50,7 @@ describe('koas-router tester',() => {
 });
 //koas controller 测试
 describe('koas controller tester',() => {
-	let koasController = new controllerTest(true);
+	let koasController = app.controller;
 	test('koasController.map must be an Object', () => {
 		koasController.jsonMap = 1; //对set jsonMap()进行测试
 		expect(typeof koasController.jsonMap).toBe('object')
@@ -64,8 +62,6 @@ describe('koas controller tester',() => {
 	});
 });
 //koas 测试
-//console.dir(new Koas())
-//let app = Koas(true);
 // app.use(async(ctx, next) => {
 // 	throw new Error('wtf')
 // 	await next();
