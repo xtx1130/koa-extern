@@ -4,8 +4,8 @@
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
-    "test": "cross-env NODE_ENV=travis jest ./test/test.js --coverage",
-    "cov": "cross-env NODE_ENV=travis ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./test/test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest ./test/test.js --coverage",
+    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./test/test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "debug": "nodemon ./test/test.js"
   },
   "keywords": [
