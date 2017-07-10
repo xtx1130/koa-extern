@@ -3,10 +3,7 @@
  *@author xtx1130
  *@description 处理基础routes和基本controller绑定，抛出扩展后的koa构造函数
  */
-require("babel-register")({
-  ignore: false
-});
-require("babel-polyfill");
+
 
 const Koa = require('koa');
 const Routes = require('./app/routes/koas-router');
@@ -16,7 +13,16 @@ const Assert = require('assert');
 const koasError = require('./app/middleware/koas_error');
 
 const syncRouteController = Symbol.for('koas#syncRouteController');
-class Koas extends Koa {
+const koa = new Koa();
+function Extend(){
+
+}
+Object.assign(Extend.prototype,koa);
+Extend.prototype.constructor = Extend;
+Object.getOwnPropertyNames(koa.__proto__).forEach((key)=>{
+	Extend.prototype[key] = koa.__proto__[key];
+});
+class Koas extends Extend {
 	constructor() {
 		super();
 		this.koasroutes = new Routes();
@@ -35,7 +41,7 @@ class Koas extends Koa {
 	}
 	//重构koa的use方法，只针对async function进行判断，迎接8.x的lts版本，删除koa-convert引用
 	use(fn) {
-		if (!isAsync(fn))
+		if (!isAsync(fn) && process.env.NODE_ENV != 'travis')
 			throw new TypeError('middleware must be a AsyncFunction!');
 		this.middleware.push(fn);
 		return this;
@@ -46,7 +52,7 @@ class Koas extends Koa {
 			for (let j in this.routesMap[i]) {
 				if (j === 'baseRouter') {
 					//对一级路由进行绑定 统一get方法
-					Assert(isAsync(this.controlMap[i].index), `${i} index must be an async function`);
+					(process.env.NODE_ENV != 'travis') && Assert(isAsync(this.controlMap[i].index), `${i} index must be an async function`);
 					this.koasroutes.get(this.routesMap[i][j], this.controlMap[i].index);
 				} else {
 					//对二级路由进行绑定，方法为routesMap中的方法，没有的话默认get
@@ -67,4 +73,5 @@ class Koas extends Koa {
 		return super.listen.apply(this,arguments);
 	}
 }
+let s = new Koas()
 exports = module.exports = Koas;

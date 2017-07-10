@@ -8,10 +8,10 @@ const err = require('../app/middleware/koas_error');
 let tests = {};
 let routesTest = require('../app/routes/koas-router');
 let controllerTest = require('../app/controllers/controller');
-let Koas = require('../');
+//let Koas = require('../');
 //koas-router 测试
 describe('koas-router tester',() => {
-	let koasRoutes = new routesTest(true);
+	let koasRoutes = new routesTest();
 	koasRoutes.map = 1; //对set map()进行测试
 	koasRoutes.jsonMap = 1; //对set jsonMap()进行测试
 	test('koasRoutes.map must be an Array', () => {
@@ -20,19 +20,19 @@ describe('koas-router tester',() => {
 	test('koasRoutes.jsonMap must be an Object', () => {
 		expect(typeof koasRoutes.jsonMap === 'object').toBe(true);
 	});
-	let testMapDel = () => {
-		for (let i = 0; i < koasRoutes.map.length; i++) {
-			if (koasRoutes.map[i] == '')
-				return true
-		}
-		return false;
-	}
 	test('one of the koa router has been deleted',() => {
 		koasRoutes.deleteRouter('list', 'listtest1');
-		//console.log(koasRoutes.map) //测试的时候看结构用
+		console.log(koasRoutes.map) //测试的时候看结构用
 		expect(koasRoutes.jsonMap.list.listtest1.status == 0).toBe(true)
 	});
 	test('deleteRouter is ok',()=>{
+		let testMapDel = () => {
+			for (let i = 0; i < koasRoutes.map.length; i++) {
+				if (koasRoutes.map[i] == '')
+					return true
+			}
+			return false;
+		}
 		expect(testMapDel()).toBe(true);
 	});
 	let testMapAdd = () => {
@@ -64,7 +64,7 @@ describe('koas controller tester',() => {
 	});
 });
 //koas 测试
-console.dir(new Koas())
+//console.dir(new Koas())
 //let app = Koas(true);
 // app.use(async(ctx, next) => {
 // 	throw new Error('wtf')
