@@ -7,11 +7,7 @@ const err = require('../../app/middleware/koas_error');
 const Koas = require('../..');
 
 let app = new Koas();
-//koas 测试
-// app.use(async(ctx, next) => {
-// 	throw new Error('wtf')
-// 	await next();
-// })
+
 describe('koas server tester',() => {
 	let server = app.listen('8011');
 	it('if 8011 port is startup or not',async () => {
