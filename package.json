@@ -54,11 +54,9 @@
     ],
     "coverageDirectory": "./coverage",
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "!**/node_modules/**",
-      "!**/test/**",
-      "**/*.js",
-      "!**/coverage/**"
+    "coverageReporters": [
+      "text-summary",
+      "lcov"
     ]
   }
 }
