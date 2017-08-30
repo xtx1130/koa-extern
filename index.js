@@ -80,6 +80,6 @@ class Koas extends Extend {
 		return super.listen(...args);
 	}
 }
-let s = new Koas();
-s.listen('8989')
+// let s = new Koas();
+// s.listen('8989')
 exports = module.exports = Koas;
