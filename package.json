@@ -4,8 +4,8 @@
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
-    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest ./test/test.js --coverage",
-    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis ./node_modules/.bin/babel-node ./node_modules/.bin/babel-istanbul cover ./test/test.js && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --coverage --forceExit",
+    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage",
     "debug": "nodemon ./test/test.js"
   },
   "keywords": [
@@ -48,6 +48,7 @@
     "url": "https://github.com/xtx1130/koa-extern"
   },
   "jest":{
+    "testMatch": ["**/test/test/**"],
     "coverageDirectory":"./coverage",
     "collectCoverage":true,
     "collectCoverageFrom":["!**/node_modules/**","!**/test/**","**/*.js","!**/coverage/**"]
