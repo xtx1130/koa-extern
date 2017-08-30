@@ -18,7 +18,7 @@ class KoasRouter extends KoaRouter {
 			super();
 			let staticRoute = {};
 			let routePath = void 0;
-			Object.getOwnPropertyNames(routerConf).forEach((key) => {
+			Object.keys(routerConf).forEach((key) => {
 				routePath = path.join(process.cwd(), routerConf[key]);
 				staticRoute[key] = require(routePath);
 				delete require.cache[require.resolve(routePath)]
@@ -30,7 +30,7 @@ class KoasRouter extends KoaRouter {
 		}
 		[privateInit]() {
 			let [tem, temBase] = [{}, '/'];
-			Object.getOwnPropertyNames(this[routes]).forEach((i) => {
+			Object.keys(this[routes]).forEach((i) => {
 				this[routes][i].baseRouter && (temBase = this[routes][i].baseRouter);
 				this[routesMap].push(addLast(temBase));
 				Object.values(this[routes][i]).forEach(ob => {

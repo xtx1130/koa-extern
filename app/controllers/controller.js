@@ -15,7 +15,7 @@ let controllerConf = require(path.join(process.cwd(), '/koasConfig')).controller
 class Controller {
 	constructor() {
 		this[controllerMap] = {};
-		Object.getOwnPropertyNames(controllerConf).forEach((key) => {
+		Object.keys(controllerConf).forEach((key) => {
 			this[controllerMap][key] = require(path.join(process.cwd(), controllerConf[key]));
 		});
 	}

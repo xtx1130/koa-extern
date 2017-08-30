@@ -55,8 +55,8 @@ class Koas extends Extend {
 	}	
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController]() {
-		for (let i in this.routesMap) {
-			for (let j in this.routesMap[i]) {
+		Object.keys(this.routesMap).forEach((i) => {
+			Object.keys(this.routesMap[i]).forEach((j) => {
 				if (j === 'baseRouter') {
 					//对一级路由进行绑定 统一get方法
 					(process.env.NODE_ENV != 'travis') && Assert(isAsync(this.controlMap[i].index), `${i} index must be an async function`);
@@ -72,8 +72,8 @@ class Koas extends Extend {
 						}
 					}
 				}
-			}
-		}
+			});
+		});
 	}
 	listen(...args) {
 		this.use(this.koasroutes.routes());
