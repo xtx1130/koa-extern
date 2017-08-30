@@ -4,7 +4,7 @@
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
-    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --coverage --forceExit",
+    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --forceExit",
     "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage",
     "debug": "nodemon ./test/test.js"
   },
