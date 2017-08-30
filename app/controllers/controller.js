@@ -10,13 +10,14 @@ const assert = require('assert');
 const controllerMap = Symbol.for('koas#controllerMap');
 
 let controllerConf = require(path.join(process.cwd(), '/koasConfig')).controller;
+(process.env.NODE_ENV=='travis') && (controllerConf = require('../../test/koasConfig').controller);
+
 class Controller {
 	constructor() {
-		(process.env.NODE_ENV=='travis') && (controllerConf = require('../../test/koasConfig').controller);
 		this[controllerMap] = {};
-		for (var i in controllerConf) {
-			this[controllerMap][i] = require(path.join(process.cwd(), controllerConf[i]));
-		}
+		Object.getOwnPropertyNames(controllerConf).forEach((key) => {
+			this[controllerMap][key] = require(path.join(process.cwd(), controllerConf[key]));
+		});
 	}
 	get jsonMap() {
 			return this[controllerMap]
