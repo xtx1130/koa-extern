@@ -13,15 +13,22 @@ const Assert = require('assert');
 const koasError = require('./app/middleware/koas_error');
 
 const syncRouteController = Symbol.for('koas#syncRouteController');
-const koa = new Koa();
-function Extend(){
+let Extend = function Extend(){
 
 }
-Object.assign(Extend.prototype,koa);
-Extend.prototype.constructor = Extend;
-Object.getOwnPropertyNames(koa.__proto__).forEach((key)=>{
-	Extend.prototype[key] = koa.__proto__[key];
-});
+if(process.env.NODE_ENV=='travis'){
+	const koa = new Koa();
+	Object.assign(Extend.prototype,koa);
+	Extend.prototype.constructor = Extend;
+	Object.getOwnPropertyNames(koa.__proto__).forEach((key)=>{
+		Extend.prototype[key] = koa.__proto__[key];
+	});
+	Object.getOwnPropertyNames(koa.__proto__.__proto__).forEach((key)=>{
+		Extend.prototype.__proto__[key] = koa.__proto__.__proto__[key];
+	});
+}else{
+	Extend = Koa;
+}
 class Koas extends Extend {
 	constructor() {
 		super();
@@ -48,8 +55,8 @@ class Koas extends Extend {
 	}	
 	//同步注册routes，controllers，通过key来寻找对应关系
 	[syncRouteController]() {
-		for (let i in this.routesMap) {
-			for (let j in this.routesMap[i]) {
+		Object.keys(this.routesMap).forEach((i) => {
+			Object.keys(this.routesMap[i]).forEach((j) => {
 				if (j === 'baseRouter') {
 					//对一级路由进行绑定 统一get方法
 					(process.env.NODE_ENV != 'travis') && Assert(isAsync(this.controlMap[i].index), `${i} index must be an async function`);
@@ -65,13 +72,14 @@ class Koas extends Extend {
 						}
 					}
 				}
-			}
-		}
+			});
+		});
 	}
-	listen() {
+	listen(...args) {
 		this.use(this.koasroutes.routes());
-		return super.listen.apply(this,arguments);
+		return super.listen(...args);
 	}
 }
-let s = new Koas()
+let s = new Koas();
+s.listen('8989')
 exports = module.exports = Koas;

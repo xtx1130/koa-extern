@@ -1,10 +1,10 @@
 'use strict';
 
 const rq = require('request-promise');
-const asyncMiddleware = require('../deps/asyncMiddleware');
-const isAsync = require('../deps/isAsyncFunc');
-const err = require('../app/middleware/koas_error');
-const Koas = require('../');
+const asyncMiddleware = require('../../deps/asyncMiddleware');
+const isAsync = require('../../deps/isAsyncFunc');
+const err = require('../../app/middleware/koas_error');
+const Koas = require('../..');
 
 let app = new Koas();
 //koas-router 测试
@@ -66,11 +66,13 @@ describe('koas controller tester',() => {
 // 	throw new Error('wtf')
 // 	await next();
 // })
-// let server = app.listen('8011');
-// if (process.env.NODE_ENV === 'travis') {
-// 	server.close(error => {
-// 		test('Could not stop server',() => {
-// 			expect(error).toBe('')
-// 		});
-// 	});
-// }
+describe('koas server tester',() => {
+	let server = app.listen('8011');
+	if (process.env.NODE_ENV === 'travis') {
+		server.close(error => {
+			test('Could not stop server',() => {
+				expect(error).toBe('')
+			});
+		});
+	}
+});
