@@ -17,6 +17,7 @@
   "license": "MIT",
   "dependencies": {
     "koa": "^2.2.0",
+    "koa-body": "^2.3.0",
     "koa-router": "^7.2.0",
     "koa2-request-middleware": "^2.0.1",
     "request": "^2.81.0",
@@ -47,10 +48,17 @@
     "type": "git",
     "url": "https://github.com/xtx1130/koa-extern"
   },
-  "jest":{
-    "testMatch": ["**/test/test/**"],
-    "coverageDirectory":"./coverage",
-    "collectCoverage":true,
-    "collectCoverageFrom":["!**/node_modules/**","!**/test/**","**/*.js","!**/coverage/**"]
+  "jest": {
+    "testMatch": [
+      "**/test/test/**"
+    ],
+    "coverageDirectory": "./coverage",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "!**/node_modules/**",
+      "!**/test/**",
+      "**/*.js",
+      "!**/coverage/**"
+    ]
   }
 }
