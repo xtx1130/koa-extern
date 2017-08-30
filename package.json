@@ -5,7 +5,7 @@
   "main": "./index.js",
   "scripts": {
     "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --forceExit",
-    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage",
+    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "debug": "nodemon ./test/test.js"
   },
   "keywords": [
@@ -55,8 +55,15 @@
     "coverageDirectory": "./coverage",
     "collectCoverage": true,
     "coverageReporters": [
-      "text-summary",
-      "lcov"
+      "json",
+      "lcov",
+      "text"
+    ],
+    "collectCoverageFrom": [
+      "!**/node_modules/**",
+      "!**/test/**",
+      "**/*.js",
+      "!**/coverage/**"
     ]
   }
 }
