@@ -1,6 +1,7 @@
 ## koa-extend
 > 对koa进行扩展，分离router和controller，支持async，舍弃koa-convert , 开发[note](https://github.com/xtx1130/koa-extern/blob/master/note)
-
+[![Build Status](https://travis-ci.org/xtx1130/koa-extern.svg?branch=master)](https://travis-ci.org/xtx1130/koa-extern)
+[![Coverage Status](https://coveralls.io/repos/github/xtx1130/koa-extern/badge.svg?branch=master)](https://coveralls.io/github/xtx1130/koa-extern?branch=master)
 ### 1.简介
 
 + 拆分开koa-router的router和controller，分别用一个js文件（router.js和controller/index.js）进行管理，分开管理router和controller，
