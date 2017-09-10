@@ -15,3 +15,23 @@
 + koa底层加入request，作为每个一级路由公用数据调用通道（已加入koa2-request-middleware）  
 + 本项目剥离业务层，所以本地环境对除虫模式的支持仅限于controller，router和底层错误均用assert直接抛出  
 + 项目完成后，会加入cli构建，开发过程中每个模块的代码均需要在/test目录下写测试用例（TO DO）
+
+### 2.文件目录
+
+root----koasConfig.js(config文件)
+      |--test/(测试用例)
+      | |--test/(测试文件)
+      | |--list/(一级路由的一级文件夹)
+      | | |--controller/(controller文件夹)
+      | | | |--index.js(总管一级路由下controller的文件)
+      | | | |--other.js(其他的路由文件，一个路由对应一个文件)
+      | | |--router.js(一级路由下面的二级~n级路由管理文件)
+      | |--movie/(同上)
+      | |--json/(mock接口文件)
+      | |--koasConfig.js(测试用的config文件)
+      |--app/
+      | |--routes/(封装的koa-router)
+      | |--controllers/(c层结构，主要是统一读取routes的function)
+      | |--routes/(router,主要是统一对路由进行处理)
+	  |--deps/(依赖文件)
+      |--index.js(入口文件)
