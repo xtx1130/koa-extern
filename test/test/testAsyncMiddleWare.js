@@ -5,7 +5,7 @@ const isAsyncFunc = require('../../deps/isAsyncFunc');
 describe('establish async middleware',() => {
 	let normalFunc = (...args)=>{};
 	test('normalFunc should return AsyncFunction',() => {
-		expect('to do' !== 'debugger').toBe(true)
-		//expect(isAsyncFunc(asyncMiddleware(normalFunc)())).toBe(true);
+		//https://github.com/caolan/async can't support function named AsyncFunction
+		expect(isAsyncFunc(asyncMiddleware(normalFunc))).toBe(false);
 	});
 });	
