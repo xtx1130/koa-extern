@@ -19,17 +19,17 @@ let errFunc = async (ctx, next)=>{
 						'<p>'+e.message+'</p>'
 					'</body>'+
 					'</html>';
-		let type = ctx.accepts(['html','text','json']);
+		let type = ctx.type;
 		switch(type){
-			case 'html':
+			case 'text/html':
 				ctx.type = 'text/html';
 				ctx.body = htmlString;
 				break;
-			case 'text':
+			case 'text/plain':
 				ctx.type = 'text/plain';
 				ctx.body = e.stack;
 				break;
-			case 'json':
+			case 'application/json':
 				ctx.type = 'application/json';
 				ctx.body = JSON.stringify({code:e.code||'No error code',stack:e.stack,message:e.message});	
 				break;
