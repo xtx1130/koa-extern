@@ -34,6 +34,7 @@ class Koas extends Extend {
 		super();
 		this.koasroutes = new Routes();
 		this.controller = new Controller();
+		this.middleware = [];
 		this[syncRouteController](); //初始化所有的二级routes
 		this.use(koasError);
 	}
@@ -81,5 +82,9 @@ class Koas extends Extend {
 	}
 }
 // let s = new Koas();
-// s.listen('8989')
+// s.use(async (ctx, next) => {
+// 		ctx.status = 404;
+// 		await next();
+// 	});
+// s.listen('8989');
 exports = module.exports = Koas;
