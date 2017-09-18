@@ -7,7 +7,7 @@ module.exports = {
 	},
 	movietest2:{
 		url:'/xtx',
-		method:'get',
+		method:'',
 		success:(ctx,next)=>{}
 	}
 }
