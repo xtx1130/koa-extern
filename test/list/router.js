@@ -1,5 +1,5 @@
 module.exports = {
-	baseRouter:'/list',
+	baseRouter:'list',
 	listtest1:{
 		url:'/:id',
 		method:'get,post',
