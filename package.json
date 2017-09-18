@@ -6,7 +6,7 @@
   "scripts": {
     "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --forceExit",
     "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "debug": "nodemon ./test/test.js"
+    "debug": "nodemon ./index.js"
   },
   "keywords": [
     "koa2",
