@@ -79,10 +79,10 @@ class Koas extends Extend {
     return super.listen(...args)
   }
 }
-// let s = new Koas();
+// let s = new Koas()
 // s.use(async (ctx, next) => {
-//   ctx.status = 404;
-// 	 await next();
-// });
-// s.listen('8989');
+//   ctx.status = 404
+//   await next()
+// })
+// s.listen('8989')
 exports = module.exports = Koas
