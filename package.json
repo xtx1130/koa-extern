@@ -6,7 +6,8 @@
   "scripts": {
     "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --forceExit",
     "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
-    "debug": "nodemon ./index.js"
+    "debug": "nodemon ./index.js",
+    "lint": "standard **/*.js *.js --fix"
   },
   "keywords": [
     "koa2",
@@ -39,6 +40,7 @@
     "jest": "^20.0.4",
     "nodemon": "^1.12.0",
     "regenerator-runtime": "^0.10.5",
+    "standard": "^11.0.1",
     "testing": "^1.1.1"
   },
   "engines": {
@@ -64,6 +66,18 @@
       "!**/test/**",
       "**/*.js",
       "!**/coverage/**"
+    ]
+  },
+  "standard": {
+    "ignore": [
+      "./converage/*",
+      "LICENSE",
+      "note",
+      "readme.md",
+      "package.json",
+      "package-lock.json",
+      "*.yml",
+      "./node_modules/*"
     ]
   }
 }
