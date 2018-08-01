@@ -4,6 +4,7 @@ const rq = require('request-promise')
 const asyncMiddleware = require('../../deps/asyncMiddleware')
 const Koas = require('../..')
 
+let server
 let requestAction = (contentType,port) => {
   return rq({
     uri:'http://localhost:'+port,
@@ -13,6 +14,7 @@ let requestAction = (contentType,port) => {
     }
   })
 }
+
 describe('koas server error test 500',() => {
 	let app = new Koas();
 	app.use(async (ctx, next) => {
@@ -24,7 +26,7 @@ describe('koas server error test 500',() => {
 	})
 	let server = app.listen('8012')
 	it('if 8012 port request 500 error',async () => {
-		expect.assertions(3)
+		expect.assertions(4)
 		try{
 			await requestAction('text/plain','8012')
 		}catch(e){
@@ -40,11 +42,10 @@ describe('koas server error test 500',() => {
 		}catch(e){
 			expect(e.statusCode).toEqual(500)
 		}
-		server.close(error => {
-			test('Could not stop server',() => {
-				expect(error).toBe('')
-			})
+		let serverClose = await new Promise((resolve, reject) => {
+			server.close(err => err ? reject(err) : resolve())
 		})
+		expect(serverClose).toBe(undefined)
 	})
 })
 describe('koas server error test 404',() => {
@@ -55,7 +56,7 @@ describe('koas server error test 404',() => {
 	});
 	let server = app.listen('8013')
 	it('if 8013 port request 404 error',async () => {
-		expect.assertions(2)
+		expect.assertions(3)
 		try{
 			await requestAction('application/json','8013')
 		}catch(e){
@@ -67,10 +68,9 @@ describe('koas server error test 404',() => {
 			//console.log(e)
 			expect(e.statusCode).toEqual(404)
 		}
-		server.close(error => {
-			test('Could not stop server',() => {
-				expect(error).toBe('')
-			})
+		let serverClose = await new Promise((resolve, reject) => {
+			server.close(err => err ? reject(err) : resolve())
 		})
+		expect(serverClose).toBe(undefined)
 	})
 })
