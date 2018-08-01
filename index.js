@@ -12,26 +12,8 @@ const Assert = require('assert')
 const koasError = require('./app/middleware/koas_error')
 
 const syncRouteController = Symbol.for('koas#syncRouteController')
-let Extend = function Extend () {
 
-}
-// if (process.env.NODE_ENV === 'travis') {
-//   const koa = new Koa()
-//   Object.assign(Extend.prototype, koa)
-//   Extend.prototype.constructor = Extend
-//   Object.getOwnPropertyNames(koa.__proto__).forEach((key) => {
-//     Extend.prototype[key] = koa.__proto__[key]
-//   })
-//   Object.getOwnPropertyNames(koa.__proto__.__proto__).forEach((key) => {
-//     Extend.prototype.__proto__[key] = koa.__proto__.__proto__[key]
-//   })
-// } else {
-//   Extend = Koa
-// }
-
-Extend = Koa
-
-class Koas extends Extend {
+class Koas extends Koa {
   constructor () {
     super()
     this.koasroutes = new Routes()

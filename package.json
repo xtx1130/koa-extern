@@ -4,8 +4,8 @@
   "description": "extend for koa",
   "main": "./index.js",
   "scripts": {
-    "test": "./node_modules/.bin/cross-env NODE_ENV=travis jest --forceExit",
-    "cov": "./node_modules/.bin/cross-env NODE_ENV=travis npm run test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
+    "test": "jest --forceExit",
+    "cov": "npm run test -- --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js",
     "debug": "nodemon ./index.js",
     "lint": "standard **/*.js *.js --fix"
   },
