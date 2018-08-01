@@ -3,7 +3,7 @@
  *@author xtx1130
  *@return {boolean} ture\false
  */
-'use strict';
+'use strict'
 exports = module.exports = func => {
-	return func.constructor.name === 'AsyncFunction';
+  return func.constructor.name === 'AsyncFunction'
 }
