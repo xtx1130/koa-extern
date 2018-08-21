@@ -1,11 +1,11 @@
 'use strict'
 module.exports = {
   router: {
-    movie: '/test/movie/router.js',
-    list: '/test/list/router.js'
+    movie: '/movie/router.js',
+    list: '/list/router.js'
   },
   controller: {
-    movie: '/test/movie/controller/index.js',
-    list: '/test/list/controller/index.js'
+    movie: '/movie/controller/index.js',
+    list: '/list/controller/index.js'
   }
 }
