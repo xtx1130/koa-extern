@@ -10,7 +10,6 @@ const assert = require('assert');
 const controllerMap = Symbol.for('koas#controllerMap');
 
 let controllerConf = require(path.join(process.cwd(), '/koasConfig')).controller;
-(process.env.NODE_ENV=='travis') && (controllerConf = require('../../test/koasConfig').controller);
 
 class Controller {
 	constructor() {
